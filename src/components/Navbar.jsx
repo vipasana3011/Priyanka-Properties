@@ -16,10 +16,16 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -29,30 +35,43 @@ export default function Navbar() {
   return (
     <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="nav-inner">
-        <Link to="/" className="nav-brand" onClick={() => setOpen(false)}>
-          <img src={logo} alt="Priyanka Properties logo" />
+        
+        {/* Logo */}
+        <Link
+          to="/"
+          className="nav-brand"
+          onClick={() => setOpen(false)}
+        >
+          <img
+            src={logo}
+            alt="Priyanka Properties"
+          />
+
           <span className="brand-name">
             PRIYANKA
             <small>PROPERTIES</small>
           </span>
         </Link>
 
+        {/* Navigation Links */}
         <ul className={`nav-links ${open ? "open" : ""}`}>
-          {links.map((l) => (
-            <li key={l.to}>
+          {links.map((link) => (
+            <li key={link.to}>
               <NavLink
-                to={l.to}
-                end={l.to === "/"}
+                to={link.to}
+                end={link.to === "/"}
                 onClick={() => setOpen(false)}
               >
-                {l.label}
+                {link.label}
               </NavLink>
             </li>
           ))}
+
+          {/* CTA Button */}
           <li>
             <Link
               to="/contact"
-              className="btn btn-gold nav-cta"
+              className="nav-contact-btn"
               onClick={() => setOpen(false)}
             >
               Get in Touch
@@ -60,10 +79,11 @@ export default function Navbar() {
           </li>
         </ul>
 
+        {/* Mobile Menu Button */}
         <button
           className={`hamburger ${open ? "open" : ""}`}
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
+          onClick={() => setOpen((prev) => !prev)}
+          aria-label="Toggle Menu"
         >
           <span></span>
           <span></span>

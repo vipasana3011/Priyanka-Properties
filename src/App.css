@@ -270,7 +270,42 @@ h1, h2, h3, h4 {
 .nav-cta {
   margin-left: 8px;
 }
+.nav-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  min-width: 160px;
+  height: 46px;
+
+  padding: 0 22px;
+
+  background: linear-gradient(
+    135deg,
+    var(--gold-bright),
+    var(--gold)
+  );
+
+  color: var(--navy-900) !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  border-radius: 8px;
+  white-space: nowrap;
+
+  box-shadow: var(--shadow-gold);
+  transition: all 0.3s ease;
+}
+
+.nav-contact-btn:hover {
+  transform: translateY(-3px);
+  color: var(--navy-900) !important;
+}
+
+.nav-contact-btn::after {
+  display: none !important;
+}
 .hamburger {
   display: none;
   flex-direction: column;
